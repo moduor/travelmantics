@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Travelmantics</string>
+    <string name="text_title_hint">Deal Title</string>
+    <string name="price_hint">Price (numbers only)</string>
+    <string name="description_hint">Description</string>
+    <string name="save_menu">save</string>
+    <string name="txt_insert_title">New Travel Deal</string>
+    <string name="txt_delete_title">Delete Deal</string>
+    <string name="txt_logout_title">Logout</string>
+    <string name="txt_upload_image">Select Image</string>
+    <string name="txt_replace_image">Replace Image</string>
+    <string name="currency">Ksh</string>
+    <string name="deal_title_label">Insert New Deal</string>
+    <string name="btn_edit_deal_text"><ul>Edit</ul></string>
+</resources>
