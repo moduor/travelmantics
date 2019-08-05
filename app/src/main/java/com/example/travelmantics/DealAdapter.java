@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,11 +29,13 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildListener;
     private ImageView imageDeal;
+    private boolean isAdmin;
 
     public DealAdapter() {
         //FirebaseUtil.openFbReference("traveldeals");
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
+        isAdmin = FirebaseUtil.isAdmin;
         deals = FirebaseUtil.mDeals;
         mChildListener = new ChildEventListener() {
             @Override
@@ -91,12 +94,21 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
         TextView tvTitle;
         TextView tvDescription;
         TextView tvPrice;
+        private Button editButton;
         public DealViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             imageDeal = itemView.findViewById(R.id.imageDeal);
+            editButton = itemView.findViewById(R.id.btn_edit);
+            Log.d("Admin DealAdapter", String.valueOf(isAdmin));
+            if(isAdmin){
+                editButton.setVisibility(View.VISIBLE);
+                editButton.setOnClickListener(this);
+            }else{
+                editButton.setVisibility(View.GONE);
+            }
             itemView.setOnClickListener(this);
 
         }
@@ -114,9 +126,15 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             int position = getAdapterPosition();
             Log.d("Clik: ", String.valueOf(position));
             TravelDeal selectedDeal = deals.get(position);
-            Intent intent = new Intent(v.getContext(), DealActivity.class);
-            intent.putExtra("Deal", selectedDeal);
-            v.getContext().startActivity(intent);
+            if(v.getId() == editButton.getId()){
+                Intent intent = new Intent(v.getContext(), DealActivity.class);
+                intent.putExtra("Deal", selectedDeal);
+                v.getContext().startActivity(intent);
+            }else{
+                Intent intent = new Intent(v.getContext(), DealDetails.class);
+                intent.putExtra("Deal", selectedDeal);
+                v.getContext().startActivity(intent);
+            }
         }
         private void showImage(String url) {
             if (url != null && url.isEmpty()==false) {

@@ -26,6 +26,7 @@ public class ListActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildListener;
+    private boolean isAdminLocal;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -53,6 +54,7 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        listDeals();
     }
 
     @Override
@@ -60,12 +62,13 @@ public class ListActivity extends AppCompatActivity {
         MenuInflater inflator = getMenuInflater();
         inflator.inflate(R.menu.list_activity_menu, menu);
         MenuItem insertMenu = menu.findItem(R.id.insert_menu);
-        if(FirebaseUtil.isAdmin == true){
+        Log.d("Is Admin on menu", String.valueOf(isAdminLocal));
+        if(isAdminLocal){
             insertMenu.setVisible(true);
             Log.d("New Deal", "Insert Menu Enabled");
         }else {
             insertMenu.setVisible(false);
-            Log.d("New Deal", "Insert Menu Disabled");
+            //Log.d("New Deal", "Insert Menu Disabled");
         }
         return true;
     }
@@ -79,7 +82,13 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        listDeals();
+    }
+
+    private void listDeals() {
         FirebaseUtil.openFbReference("traveldeals", this);
+        isAdminLocal = FirebaseUtil.isAdmin;
+        Log.d("Is Admin Local Resume", String.valueOf(FirebaseUtil.isAdmin));
 
         RecyclerView rvDeals = (RecyclerView) findViewById(R.id.rvDeals);
         final DealAdapter adapter = new DealAdapter();
@@ -89,6 +98,7 @@ public class ListActivity extends AppCompatActivity {
                 new LinearLayoutManager(this);
         rvDeals.setLayoutManager(dealsLayoutManager);
         FirebaseUtil.attachListener();
+        showMenu();
     }
 
     public void showMenu(){

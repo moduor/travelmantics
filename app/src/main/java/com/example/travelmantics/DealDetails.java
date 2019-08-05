@@ -1,12 +1,15 @@
 package com.example.travelmantics;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.squareup.picasso.Picasso;
 
 public class DealDetails extends AppCompatActivity {
     TextView txtTitle;
@@ -32,6 +35,18 @@ public class DealDetails extends AppCompatActivity {
         TravelDeal deal1 = deal;
         txtTitle.setText(deal.getTitle());
         txtDescription.setText(deal.getDescription());
-        txtPrice.setText(deal.getPrice());
+        txtPrice.setText("Trip Price: Ksh " + deal.getPrice());
+        showImage(deal.getImageUrl());
+    }
+
+    private void showImage(String url){
+        if(url != null && !url.isEmpty()){
+            int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+            Picasso.get()
+                    .load(url)
+                    .resize(width, width * 2/3)
+                    .centerCrop()
+                    .into(imageView);
+        }
     }
 }

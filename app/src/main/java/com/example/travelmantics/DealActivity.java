@@ -199,7 +199,7 @@ public class DealActivity extends AppCompatActivity {
 
             View view = getCurrentFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+            //imm.hideSoftInputFromWindow(view.getWindowToken(),0);
             //findViewById(R.id.btnImage).setEnabled(false);
         }
         return true;
