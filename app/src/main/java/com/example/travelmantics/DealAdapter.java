@@ -21,7 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder> {
     ArrayList<TravelDeal> deals;
@@ -117,7 +119,8 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             tvTitle.setText(deal.getTitle());
             tvDescription.setText(deal.getDescription());
             //String price = "Ksh " + String.format("%,.2f", deal.getPrice() );
-            tvPrice.setText("Ksh " + deal.getPrice().toString());
+            String price = formatPrice(deal.getPrice()) ;
+            tvPrice.setText(price);
             showImage(deal.getImageUrl());
         }
 
@@ -137,13 +140,20 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             }
         }
         private void showImage(String url) {
-            if (url != null && url.isEmpty()==false) {
+            if (url != null && !url.isEmpty()) {
                 Picasso.get()
                         .load(url)
-                        .resize(160, 160)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(imageDeal);
             }
         }
+    }
+    public String formatPrice(String price){
+        Locale locale = new Locale("en", "KE");
+        Double newPrice = Double.parseDouble(price);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
+        //System.out.println("Amount is - " + finalAmount);
+        return formatter.format(newPrice);
     }
 }
