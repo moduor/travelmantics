@@ -11,7 +11,6 @@
             android:layout_height="wrap_content"
             tools:context=".DealActivity">
 
-
             <EditText
                 android:id="@+id/txtTitle"
                 android:layout_width="match_parent"

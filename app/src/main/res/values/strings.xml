@@ -12,4 +12,7 @@
     <string name="currency">Ksh</string>
     <string name="deal_title_label">Insert New Deal</string>
     <string name="btn_edit_deal_text"><ul>Edit</ul></string>
+    <string name="txt_menu_edit">Edit</string>
+    <string name="txt_menu_delete">Delete</string>
+    <string name="txt_menu_book">Book Deal</string>
 </resources>

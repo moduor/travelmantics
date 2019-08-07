@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -96,20 +98,24 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
         TextView tvTitle;
         TextView tvDescription;
         TextView tvPrice;
-        private Button editButton;
+        private ImageButton editButton;
+        //private FloatingActionButton fabInsertDeal;
         public DealViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             imageDeal = itemView.findViewById(R.id.imageDeal);
-            editButton = itemView.findViewById(R.id.btn_edit);
+            editButton = itemView.findViewById(R.id.edit_image);
+            //fabInsertDeal = itemView.findViewById(R.id.fab_insert_deal);
             Log.d("Admin DealAdapter", String.valueOf(isAdmin));
             if(isAdmin){
                 editButton.setVisibility(View.VISIBLE);
+                //fabInsertDeal.show();
                 editButton.setOnClickListener(this);
             }else{
                 editButton.setVisibility(View.GONE);
+                //fabInsertDeal.hide();
             }
             itemView.setOnClickListener(this);
 
@@ -143,7 +149,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             if (url != null && !url.isEmpty()) {
                 Picasso.get()
                         .load(url)
-                        .resize(200, 200)
+                        .resize(250, 250)
                         .centerCrop()
                         .into(imageDeal);
             }

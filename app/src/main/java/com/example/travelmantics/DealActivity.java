@@ -51,6 +51,11 @@ public class DealActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal);
 
+        // Check if is admin
+        if(!FirebaseUtil.isAdmin){
+            backToList();
+        }
+
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
 
@@ -185,7 +190,7 @@ public class DealActivity extends AppCompatActivity {
         MenuInflater inflator = getMenuInflater();
         Button imgButton = findViewById(R.id.btnImage);
         inflator.inflate(R.menu.save_menu, menu);
-        if(FirebaseUtil.isAdmin == true){
+        if(FirebaseUtil.isAdmin){
             menu.findItem(R.id.delete_menu).setVisible(true);
             menu.findItem(R.id.save_menu).setVisible(true);
             enableEditTexts(true);

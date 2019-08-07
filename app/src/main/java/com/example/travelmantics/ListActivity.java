@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -55,6 +57,24 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listDeals();
+
+        showHideFab();
+    }
+
+    private void showHideFab() {
+        FloatingActionButton fab = findViewById(R.id.fab_insert_deal);
+
+        if(!isAdminLocal){
+            fab.hide();
+        }else{
+            fab.show();
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(ListActivity.this, DealActivity.class));
+                }
+            });
+        }
     }
 
     @Override
@@ -83,6 +103,7 @@ public class ListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         listDeals();
+        showHideFab();
     }
 
     private void listDeals() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="text_margin_standard">16dp</dimen>
     <dimen name="text_margin_medium">10dp</dimen>
     <dimen name="text_margin_card">8dp</dimen>
@@ -7,4 +7,5 @@
     <dimen name="margin_large">24sp</dimen>
     <dimen name="text_price">18sp</dimen>
     <dimen name="card_radius">10dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
 </resources>
