@@ -107,15 +107,12 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
             tvPrice = itemView.findViewById(R.id.tvPrice);
             imageDeal = itemView.findViewById(R.id.imageDeal);
             editButton = itemView.findViewById(R.id.edit_image);
-            //fabInsertDeal = itemView.findViewById(R.id.fab_insert_deal);
             Log.d("Admin DealAdapter", String.valueOf(isAdmin));
             if(isAdmin){
                 editButton.setVisibility(View.VISIBLE);
-                //fabInsertDeal.show();
                 editButton.setOnClickListener(this);
             }else{
                 editButton.setVisibility(View.GONE);
-                //fabInsertDeal.hide();
             }
             itemView.setOnClickListener(this);
 

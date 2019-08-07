@@ -107,7 +107,6 @@ public class DealDetails extends AppCompatActivity {
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                //Toast.makeText(DealDetails.this, "Delete has been cancelled", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });

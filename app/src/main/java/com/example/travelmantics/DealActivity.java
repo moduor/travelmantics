@@ -74,9 +74,6 @@ public class DealActivity extends AppCompatActivity {
         txtDescription.setText(deal.getDescription());
         txtPrice.setText(deal.getPrice());
 
-        //if(deal.getTitle() != null && !deal.getTitle().isEmpty())
-        //    mActionBar.setTitle("Editing: " + deal.getTitle().toString());
-
         String imgUrl = deal.getImageUrl();
         showImage(deal.getImageUrl());
         Button btnImage = findViewById(R.id.btnImage);
@@ -195,17 +192,11 @@ public class DealActivity extends AppCompatActivity {
             menu.findItem(R.id.save_menu).setVisible(true);
             enableEditTexts(true);
             imgButton.setVisibility(View.VISIBLE);
-            //findViewById(R.id.btnImage).setEnabled(true);
         }else{
             menu.findItem(R.id.delete_menu).setVisible(false);
             menu.findItem(R.id.save_menu).setVisible(false);
             enableEditTexts(false);
             imgButton.setVisibility(View.GONE);
-
-            View view = getCurrentFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            //imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-            //findViewById(R.id.btnImage).setEnabled(false);
         }
         return true;
     }
