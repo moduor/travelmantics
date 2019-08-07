@@ -58,7 +58,7 @@ public class DealDetails extends AppCompatActivity {
         txtTitle.setText(deal.getTitle());
         txtDescription.setText(deal.getDescription());
         DealAdapter dealAdapter = new DealAdapter();
-        String price = "Trip Price: " + dealAdapter.formatPrice(deal.getPrice());
+        String price = "Deal Cost: " + dealAdapter.formatPrice(deal.getPrice());
 
         txtPrice.setText(price);
         showImage(deal.getImageUrl());
